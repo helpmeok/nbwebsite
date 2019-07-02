@@ -79,6 +79,9 @@ $(function () {
             $('.title').html(res.data.title)
             $('.head-portrait').attr('src', res.data.userAvatar)
             $('.name').html(res.data.author)
+            if (res.data.oauthIntro) {
+                $('.oauth-desc').html(res.data.oauthIntro)
+            }
             if (res.data.categoryName) {
                 $('.classify').html(res.data.categoryName)
             } else {
