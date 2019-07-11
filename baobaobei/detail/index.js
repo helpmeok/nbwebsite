@@ -1,6 +1,6 @@
 $(function () {
     if (parseInt(GetQueryString('apiType')) == 0) {
-        window.__api = 'http://59.61.216.123:18980/jeezero-boblbee-app/';
+        window.__api = 'https://dev.jeezero.com:18980/jeezero-boblbee-app/';
     } else if (parseInt(GetQueryString('apiType')) == 1) {
         window.__api = ' http://beta.jeezero.com/jeezero-boblbee-app/';
     } else {
@@ -67,6 +67,10 @@ $(function () {
         },
         success: function (res) {
             console.log(res)
+			if (res.code==-1) {
+				$('#app').hide()
+				return
+			}
             res.data.content = res.data.content.replace(/<img/g, '<img style="max-width:100%;" onclick="lookImage(this)"')
             res.data.content = res.data.content.replace(/href/g, 'data-href')
             res.data.content = res.data.content.replace(/<section/g, '<section style="max-width:100%;"')
@@ -87,10 +91,10 @@ $(function () {
             } else {
                 $('.classify').hide()
             }
-
         },
         error: function (err) {
             console.log(err)
+			$('#app').hide()
         }
     })
 
