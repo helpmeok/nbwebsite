@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta name="referrer" content="never">
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<meta name="MobileOptimized" content="320">
+		<!-- uc强制竖屏 -->
+		<meta name="screen-orientation" content="portrait">
+		<!-- QQ强制竖屏 -->
+		<meta name="x5-orientation" content="portrait">
+		<!-- UC强制全屏 -->
+		<meta name="full-screen" content="yes">
+		<!-- QQ强制全屏 -->
+		<meta name="x5-fullscreen" content="true">
+		<!-- UC应用模式 -->
+		<meta name="browsermode" content="application">
+		<meta name="apple-mobile-web-app-title" content="古美术.H5" />
+		<!-- QQ应用模式 -->
+		<meta name="x5-page-mode" content="app">
+		<!-- windows phone 点击无高光 -->
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<title>宝宝贝</title>
+		<script src="./jquery.min.js"></script>
+		<style>
+			* {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            visibility: hidden;
+        }
+		#app{
+			padding: .3rem;
+			box-sizing: border-box;
+		}
+        .container {
+            position: relative;
+            left: 0;
+            top: 0;
+            /* height: 15rem; */
+        }
+		.bold{
+			font-weight: bold;
+		}
+       
+
+        .head-portrait {
+            width: .8rem;
+            height: .8rem;
+			border-radius: 50% !important;
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .flex {
+            display: flex;
+            align-items: center;
+        }
+
+        .name {
+            font-size: .3rem;
+            margin-left: .2rem;
+        }
+        .oauth-desc{
+            font-size: .2rem !important;
+            color: #A3A3A3;
+            margin-left: .2rem;
+        }
+        .fixed-bottom {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            z-index: 1;
+            width: 100%;
+        }
+		.download-app{
+			  width: 100%;
+			 background-color: rgba(51, 51, 51, 0.91);
+			   display: flex;
+			padding: .2rem .3rem;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+        .pad-bottom {
+            height: 2rem;
+        }
+
+        .logo {
+            width: 1rem;
+            height: 1rem;
+            border-radius: .1rem;
+        }
+
+        .fixed-bottom .font {
+            height: .8rem;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+
+        .download {
+            color: white;
+            font-size: .28rem;
+            background-color: #FC4041;
+            padding: .1rem .3rem;
+            border-radius: .5rem;
+        }
+		.post-btn-box{
+			width: 100%;
+			background:rgba(255,255,255,1);
+			box-shadow:0px 3px 80px 0px rgba(0, 0, 0, 0.1);
+			padding: .2rem 0;
+		}
+		.post-btn{
+			width: 80%;
+			height: .8rem;
+			text-align: center;
+			line-height: .8rem;
+			background-color: #FC4041;
+			border-radius: 1rem;
+			font-size: .3rem;
+			color: white;
+		}
+        .close {
+            width: .3rem;
+            height: .3rem;
+        }
+
+        .mask {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+        }
+		.question-box {
+			box-sizing: border-box;
+			background-color: #ffffff;
+			border-radius: .2rem;
+			padding: .3rem;
+			box-shadow: 0 .1rem .6rem 0 rgba(0, 0, 0, 0.04);
+			width:100%;
+			margin: .3rem 0;
+		}
+		.question-text{
+			font-size: .4rem;
+		}
+		.question{
+			
+		}
+		.question .question-icon{
+			float: left;
+			width: .5rem;
+			margin-right: .2rem;
+		}
+		.imgs-mask{
+			width: 100%;
+			overflow: hidden;
+			overflow-x: scroll;
+		}
+		.imgs-box {
+			margin: .2rem 0;
+			overflow-x: scroll;
+		}
+		.imgs-box .img{
+			width: 1.6rem;
+			height: 1.6rem;
+			margin-right: .2rem;
+		}
+		.flex-r-between {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+		}
+		.answer-count{
+			color: gray;
+			font-size: .28rem;
+		}
+		.comment-box{
+			padding:.2rem  0 ;
+			border-top: .03rem solid #EEEEEE;
+		}	
+		.comment-box .sigle-line-text-2 {
+			width: 100%;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			overflow: hidden;
+			font-size: .28rem;
+		}
+		.flex-c-center {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+    </style>
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="author">
+				<div class="flex" onclick="goFamous()">
+					<img src="" alt="" class="head-portrait">
+					<div>
+						<div class="name bold"></div>
+						<div class="oauth-desc"></div>
+					</div>
+				</div>
+				<div class="classify" onclick="goCategory()">
+
+				</div>
+			</div>
+			<div class="question-box">
+				<div class="question">
+					<img src="./images/assistant_list_ic_question@3x.png" class="question-icon">
+					<div class="question-text bold"></div>
+				</div>
+				<div class="imgs-mask">
+					<div class="imgs-box">
+
+					</div>
+				</div>
+				<div class="flex-r-between">
+					<div class="answer-count">
+
+					</div>
+					<div class="flex" onclick="download()">
+						<div style="color: #FC4041;font-size: .28rem;">我来回答</div>
+						<img src="images/qa_card_ic_answer_nor@3x.png" style="width: .4rem;">
+					</div>
+				</div>
+			</div>
+			<!-- <div class="line" style="height:.03rem;background-color: #EEEEEE;margin:.3rem 0;width: 100%;"></div> -->
+			<div class="comments">
+				<div class="comment-box">
+					<div class="flex" style="margin-bottom: .2rem;">
+						<img src="images/assistant_list_ic_question@3x.png" class="head-portrait">
+						<div>
+							<div class="name bold">啊是大啊是大</div>
+							<div class="oauth-desc">爱的啊是大</div>
+						</div>
+					</div>
+					<div>
+						<div class="sigle-line-text-2">
+							啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大啊是大
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pad-bottom"></div>
+
+			<div class="fixed-bottom">
+				<div class="flex-c-center post-btn-box">
+					<div class="post-btn" onclick="download()">发布新问题</div>
+				</div>
+				<div class="download-app">
+					<img src="./images/logo.png" alt="" class="logo">
+					<div class="font">
+						<div style="font-weight: bold;color:white;font-size:.34rem;">查看更多育儿专业知识</div>
+						<div style="font-size: .26rem;  color: #e8e8e8;">请下载宝宝贝</div>
+					</div>
+					<div class="download" onclick="download()">
+						下载APP
+					</div>
+					<img src="./images/close.png" alt="" class="close">
+				</div>
+
+			</div>
+		</div>
+		<script type="text/javascript">
+			function phoneType() {
+				var _ua = navigator.userAgent.toLowerCase();
+				if (/iphone|ipad|ipod/.test(_ua)) {
+					return "iOS";
+				} else if (/android/.test(_ua)) {
+					return "android";
+				} else {
+					return "pc";
+				}
+			}
+			var imgArr = []
+
+			function download() {
+				window.location.href = "https://sj.qq.com/myapp/detail.htm?apkName=com.bbbei"
+			} +
+			(function() {
+				var _size = 'qa.js?v=' + Date.now();
+				var _s = document.createElement('script');
+				_s.src = _size;
+				document.body.appendChild(_s);
+			})();
+		</script>
+	</body>
+
+</html>
