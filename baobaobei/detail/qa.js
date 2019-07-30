@@ -6,7 +6,6 @@ $(function() {
 	} else {
 		window.__api = 'https://boblbee.superpapa.com.cn/jeezero-boblbee-app/';
 	}
-	window.__api = 'https://dev.jeezero.com:18980/jeezero-boblbee-app/';
 
 	function GetQueryString(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -21,7 +20,7 @@ $(function() {
 		})
 	})
 	var question_id = GetQueryString('question_id');
-	var question_id = 21;
+	// var question_id = 21;
 
 	function getimgsrc(htmlstr) {
 		var reg = /<img.+?src=('|")?([^'"]+)('|")?(?:\s+|>)/gim;
