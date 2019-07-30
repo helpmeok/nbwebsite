@@ -59,7 +59,7 @@ $(function() {
 	$.ajax({
 		async: false,
 		type: 'get',
-		url: __api + 'v1/questionReplay/getQuestionDetail',
+		url: __api + 'v1/questionReply/getQuestionDetail',
 		header: {
 			// Authorization: token,
 			appname: "boblbee",
@@ -83,7 +83,7 @@ $(function() {
 				width: imgsWidth + 'rem'
 			})
 			$('.question-box .imgs-box').html(imgHtml)
-			$('.answer-count').html(res.data.answerCnt + '个回答')
+			$('.answer-count').html(res.data.answerNum + '个回答')
 		},
 		error: function(err) {
 			console.log(err)
@@ -93,7 +93,7 @@ $(function() {
 	$.ajax({
 		async: false,
 		type: 'get',
-		url: __api + 'v1/questionReplay/getOneQuestionReplayList',
+		url: __api + 'v1/questionReply/getOneQuestionReplyList',
 		header: {
 			// Authorization: token,
 			appname: "boblbee",
@@ -109,7 +109,8 @@ $(function() {
 			console.log(res)
 			var commentHtml = '';
 			res.data.forEach(function(el) {
-				commentHtml += `<div class="comment-box" onclick="download()">
+				commentHtml +=
+					`<div class="comment-box" onclick="download()">
 				<div class="flex" style="margin-bottom: .2rem;">
 					<img src="${el.userAvatar}" class="head-portrait">
 					<div>
@@ -124,7 +125,7 @@ $(function() {
 				</div>
 			</div>`
 			})
-						$('.comments').html(commentHtml)
+			$('.comments').html(commentHtml)
 		},
 		error: function(err) {
 			console.log(err)
