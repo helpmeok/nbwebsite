@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta name="referrer" content="never">
-    <meta http-equiv="pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <meta name="MobileOptimized" content="320">
-    <!-- uc强制竖屏 -->
-    <meta name="screen-orientation" content="portrait">
-    <!-- QQ强制竖屏 -->
-    <meta name="x5-orientation" content="portrait">
-    <!-- UC强制全屏 -->
-    <meta name="full-screen" content="yes">
-    <!-- QQ强制全屏 -->
-    <meta name="x5-fullscreen" content="true">
-    <!-- UC应用模式 -->
-    <meta name="browsermode" content="application">
-    <meta name="apple-mobile-web-app-title" content="古美术.H5" />
-    <!-- QQ应用模式 -->
-    <meta name="x5-page-mode" content="app">
-    <!-- windows phone 点击无高光 -->
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <title>宝宝贝</title>
-    <script src="./jquery.min.js"></script>
-    <style>
-        * {
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta name="referrer" content="never">
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<meta name="MobileOptimized" content="320">
+		<!-- uc强制竖屏 -->
+		<meta name="screen-orientation" content="portrait">
+		<!-- QQ强制竖屏 -->
+		<meta name="x5-orientation" content="portrait">
+		<!-- UC强制全屏 -->
+		<meta name="full-screen" content="yes">
+		<!-- QQ强制全屏 -->
+		<meta name="x5-fullscreen" content="true">
+		<!-- UC应用模式 -->
+		<meta name="browsermode" content="application">
+		<meta name="apple-mobile-web-app-title" content="古美术.H5" />
+		<!-- QQ应用模式 -->
+		<meta name="x5-page-mode" content="app">
+		<!-- windows phone 点击无高光 -->
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<title>宝宝贝</title>
+		<script src="./jquery.min.js"></script>
+		<style>
+			* {
             box-sizing: border-box;
         }
 
@@ -229,137 +229,237 @@
             margin-left: .1rem;
             width: .6rem;
         }
-     
+		.vedio,.audio{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.question-box{
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			padding: .2rem .3rem;
+		}
+		.question-box .item{
+			border: .02rem solid #f5f5f5;
+			padding: .1rem .3rem;
+			border-radius: .3rem;
+			font-size: .28rem;
+			margin-right: .3rem;
+			margin-bottom: .2rem;
+		}
+		.pd-box{
+			padding: .2rem .3rem;
+		}
+		.flex-r-around {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-around;
+		}
+		.flex-c-center {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+		.flex-r-between {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+		}
+		
+		.sigle-line-text {
+			width: 100%;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			text-align: left;
+		}
+		
+		.sigle-line-text-2 {
+			width: 100%;
+			display: -webkit-box;
+		/*! autoprefixer: off */
+-webkit-box-orient: vertical;
+/* autoprefixer: on */
+			-webkit-line-clamp: 2;
+			overflow: hidden;
+		}
+		
+		.expend-box .item{
+			width: 48%;
+			margin-top: .2rem;
+		}
+		.recommend-box .item{
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			height: 2rem;
+			padding: .2rem 0;
+			}
     </style>
-</head>
+	</head>
 
-<body>
-    <div id="app">
-        <div class="title">
+	<body>
+		<div id="app">
+			<div class="title">
 
-        </div>
-        <div class="author">
-            <div class="flex" onclick="goFamous()">
-                <img src="" alt="" class="head-portrait">
-                <div>
-                    <div class="name"></div>
-                    <div class="oauth-desc"></div>
-                </div>
-            </div>
-            <div class="classify" onclick="goCategory()">
+			</div>
+			<div class="author">
+				<div class="flex" onclick="goFamous()">
+					<img src="" alt="" class="head-portrait">
+					<div>
+						<div class="name"></div>
+						<div class="oauth-desc"></div>
+					</div>
+				</div>
+				<div class="classify" onclick="goCategory()">
 
-            </div>
-        </div>
-        <div class="container">
-            <div class="content">
+				</div>
+			</div>
+			<div class="container">
+				<div class="content">
 
-            </div> 
-            <div class="mask">
-                <div class="filter"></div>
-                <div class="show-all">
-                    <div>查看更多</div>
-                    <img src="./images/details_list_ic_more_nor@3x.png" alt="">
-                </div>
-            </div>
-        </div>
+				</div>
+				<div class="vedio">
+
+				</div>
+				<div class="audio">
+
+				</div>
+				<div class="more-content" onclick="download()">
+					<div style="height: .02rem;width: 100%;background-color: #f5f5f5;"></div>
+					<div class="question-box">
+					</div>
+					<div style="height: .2rem;width: 100%;background-color: #f5f5f5;" class="expend"></div>
+					<div class="pd-box expend">
+						<div style="font-size: .34rem;font-weight: bold;">
+							延展阅读
+						</div>
+						<div class="flex-r-between expend-box" style="width: 100%;">
+						</div>
+					</div>
+					<div style="height: .2rem;width: 100%;background-color: #f5f5f5;" class="recommend"></div>
+					<div class="pd-box recommend">
+						<div style="font-size: .34rem;font-weight: bold;">
+							推荐阅读
+						</div>
+						<div class=" recommend-box">
+						</div>
+					</div>
+				</div>
+				<div class="mask">
+					<div class="filter"></div>
+					<div class="show-all">
+						<div>查看更多</div>
+						<img src="./images/details_list_ic_more_nor@3x.png" alt="">
+					</div>
+				</div>
+			</div>
 
 
-        <div class="pad-bottom"></div>
-        <div class="fixed-bottom">
-            <img src="./images/logo.png" alt="" class="logo">
-            <div class="font">
-                <div style="font-weight: bold;color:white;font-size:.34rem;">查看更多育儿专业知识</div>
-                <div style="font-size: .26rem;  color: #e8e8e8;">请下载宝宝贝</div>
-            </div>
-            <div class="download" onclick="download()">
-                下载APP
-            </div>
-            <img src="./images/close.png" alt="" class="close">
-        </div>
-    </div>
-    <script type="text/javascript">
-        function phoneType() {
-            var _ua = navigator.userAgent.toLowerCase();
-            if (/iphone|ipad|ipod/.test(_ua)) {
-                return "iOS";
-            } else if (/android/.test(_ua)) {
-                return "android";
-            } else {
-                return "pc";
-            }
-        }
-        var imgArr = []
+			<div class="pad-bottom"></div>
+			<div class="fixed-bottom">
+				<img src="./images/logo.png" alt="" class="logo">
+				<div class="font">
+					<div style="font-weight: bold;color:white;font-size:.34rem;">查看更多育儿专业知识</div>
+					<div style="font-size: .26rem;  color: #e8e8e8;">请下载宝宝贝</div>
+				</div>
+				<div class="download" onclick="download()">
+					下载APP
+				</div>
+				<img src="./images/close.png" alt="" class="close">
+			</div>
+		</div>
+		<script type="text/javascript">
+			function phoneType() {
+				var _ua = navigator.userAgent.toLowerCase();
+				if (/iphone|ipad|ipod/.test(_ua)) {
+					return "iOS";
+				} else if (/android/.test(_ua)) {
+					return "android";
+				} else {
+					return "pc";
+				}
+			}
+			var imgArr = []
 
-        function download() {
-            window.location.href = "https://sj.qq.com/myapp/detail.htm?apkName=com.bbbei"
-        }
+			function download() {
+				window.location.href = "https://sj.qq.com/myapp/detail.htm?apkName=com.bbbei"
+			}
 
-        function setupWebViewJavascriptBridge(callback) {
-            if (window.WebViewJavascriptBridge) {
-                return callback(WebViewJavascriptBridge);
-            }
-            if (window.WVJBCallbacks) {
-                return window.WVJBCallbacks.push(callback);
-            }
-            window.WVJBCallbacks = [callback];
-            var WVJBIframe = document.createElement('iframe');
-            WVJBIframe.style.display = 'none';
-            WVJBIframe.src = 'https://__bridge_loaded__';
-            document.documentElement.appendChild(WVJBIframe);
-            setTimeout(function () {
-                document.documentElement.removeChild(WVJBIframe)
-            }, 0)
-        }
+			function setupWebViewJavascriptBridge(callback) {
+				if (window.WebViewJavascriptBridge) {
+					return callback(WebViewJavascriptBridge);
+				}
+				if (window.WVJBCallbacks) {
+					return window.WVJBCallbacks.push(callback);
+				}
+				window.WVJBCallbacks = [callback];
+				var WVJBIframe = document.createElement('iframe');
+				WVJBIframe.style.display = 'none';
+				WVJBIframe.src = 'https://__bridge_loaded__';
+				document.documentElement.appendChild(WVJBIframe);
+				setTimeout(function() {
+					document.documentElement.removeChild(WVJBIframe)
+				}, 0)
+			}
 
-        +
-        (function () {
-            var _size = 'index.js?v=' + Date.now();
-            var _s = document.createElement('script');
-            _s.src = _size;
-            document.body.appendChild(_s);
-        })();
+			+
+			(function() {
+				var _size = 'index.js?v=' + Date.now();
+				var _s = document.createElement('script');
+				_s.src = _size;
+				document.body.appendChild(_s);
+			})();
 
-        function goFamous() {
-            console.log('1111')
-            if (phoneType() == "iOS") {
-                setupWebViewJavascriptBridge(function (bridge) {
-                    bridge.callHandler('goFamous', null, function responseCallback(responseData) {
+			function goFamous() {
+				console.log('1111')
+				if (phoneType() == "iOS") {
+					setupWebViewJavascriptBridge(function(bridge) {
+						bridge.callHandler('goFamous', null, function responseCallback(responseData) {
 
-                    })
-                })
-                window.webkit.messageHandlers.goFamous.postMessage(null);
-            }
-        }
+						})
+					})
+					window.webkit.messageHandlers.goFamous.postMessage(null);
+				}
+			}
 
-        function goCategory() {
-            console.log('2222')
-            if (phoneType() == "iOS") {
-                setupWebViewJavascriptBridge(function (bridge) {
-                    bridge.callHandler('goCategory', null, function responseCallback(responseData) {
+			function goCategory() {
+				console.log('2222')
+				if (phoneType() == "iOS") {
+					setupWebViewJavascriptBridge(function(bridge) {
+						bridge.callHandler('goCategory', null, function responseCallback(responseData) {
 
-                    })
-                })
-                window.webkit.messageHandlers.goCategory.postMessage(null);
-            }
-        }
+						})
+					})
+					window.webkit.messageHandlers.goCategory.postMessage(null);
+				}
+			}
 
-        function lookImage(e) {
-            var obj = {
-                index: imgArr.indexOf(e.src),
-                list: imgArr
-            }
-            console.log(obj)
-            if (phoneType() == "iOS") {
-                setupWebViewJavascriptBridge(function (bridge) {
-                    bridge.callHandler('lookImage', JSON.stringify(obj), function responseCallback(
-                        responseData) {
+			function lookImage(e) {
+				var obj = {
+					index: imgArr.indexOf(e.src),
+					list: imgArr
+				}
+				console.log(obj)
+				if (obj.index == -1) {
+					return
+				}
+				if (phoneType() == "iOS") {
+					setupWebViewJavascriptBridge(function(bridge) {
+						bridge.callHandler('lookImage', JSON.stringify(obj), function responseCallback(
+							responseData) {
 
-                    })
-                })
-                window.webkit.messageHandlers.lookImage.postMessage(JSON.stringify(obj));
-            }
-        }
-    </script>
-</body>
+						})
+					})
+					window.webkit.messageHandlers.lookImage.postMessage(JSON.stringify(obj));
+				}
+			}
+		</script>
+	</body>
 
 </html>
