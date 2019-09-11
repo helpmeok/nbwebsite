@@ -92,6 +92,15 @@ $(function() {
 			} else {
 				$('.classify').hide()
 			}
+			if (res.data.tagList.length) {
+				var tagHtml=''
+				res.data.tagList.forEach(function (el,i) {
+					tagHtml+=`<div class="item" onclick="goTag(${i})">${el.name}</div>`
+				})
+				$('.tags').html(tagHtml)
+			} else {
+				$('.tags').hide()
+			}
 			if (res.data.showType == 4) {
 				$('.audio').html(`<audio src="${res.data.attachment[0].url}" controls>
 				  您的浏览器不支持音频播放。
