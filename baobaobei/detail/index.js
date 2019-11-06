@@ -1,10 +1,10 @@
 $(function() {
 	if (parseInt(GetQueryString('apiType')) == 0) {
-		window.__api = 'https://dev.jeezero.com:18980/jeezero-boblbee-app/';
+		window.__api = 'https://dev.jeezero.com:18980/jeezero-boblbee-app/';//开发
 	} else if (parseInt(GetQueryString('apiType')) == 1) {
-		window.__api = 'https://beta.jeezero.com:18980/jeezero-boblbee-app/';
+		window.__api = 'https://beta.jeezero.com:18980/jeezero-boblbee-app/';//仿真
 	} else {
-		window.__api = 'https://boblbee.superpapa.com.cn/jeezero-boblbee-app/';
+		window.__api = 'https://boblbee.superpapa.com.cn/jeezero-boblbee-app/';//正式
 	}
 	// window.__api = 'https://dev.jeezero.com:18980/jeezero-boblbee-app/';
 
@@ -129,7 +129,7 @@ $(function() {
 					res.data.expendList.forEach(function(el){
 						expendHtml+=`<div class="item">
 							<img src="${el.attachment[0].url}" style="width: 100%;height: 2.2rem;">
-							<div class="sigle-line-text" style="font-size: .3rem;WebkitBoxOrient: vertical;">${el.title}阿达撒点阿萨德阿萨德阿萨德阿萨德阿萨德阿萨德阿萨德撒</div>
+							<div class="sigle-line-text" style="font-size: .3rem;WebkitBoxOrient: vertical;">${el.title}</div>
 							<div style="color: gray;font-size: .26rem; margin: .1rem 0;">
 								<span>${el.author}</span>
 							</div>

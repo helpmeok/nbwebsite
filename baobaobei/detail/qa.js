@@ -1,10 +1,10 @@
-$(function() {
+$(function () {
 	if (parseInt(GetQueryString('apiType')) == 0) {
-		window.__api = 'https://dev.jeezero.com:18980/jeezero-boblbee-app/';
+		window.__api = 'https://dev.jeezero.com:18980/jeezero-boblbee-app/';//开发
 	} else if (parseInt(GetQueryString('apiType')) == 1) {
-		window.__api = ' http://beta.jeezero.com/jeezero-boblbee-app/';
+		window.__api = 'https://beta.jeezero.com:18980/jeezero-boblbee-app/';//仿真
 	} else {
-		window.__api = 'https://boblbee.superpapa.com.cn/jeezero-boblbee-app/';
+		window.__api = 'https://boblbee.superpapa.com.cn/jeezero-boblbee-app/';//正式
 	}
 
 	function GetQueryString(name) {
@@ -13,7 +13,7 @@ $(function() {
 		if (r != null) return unescape(r[2]);
 		return null;
 	}
-	$('.close').click(function() {
+	$('.close').click(function () {
 		$('.download-app').hide()
 		$('.pad-bottom').css({
 			height: "1rem"
@@ -37,45 +37,29 @@ $(function() {
 	}
 	size();
 	window.onresize = size;
-	setTimeout(function() {
+	setTimeout(function () {
 		document.querySelector("body").style.visibility = "visible"
 		document.querySelector("html").style.visibility = "visible"
 	}, 100);
-	// $('.head-portrait').attr('src', res.data.userAvatar)
-	// $('.name').html(res.data.userName)
-	// $('.oauth-desc').html(res.data.oauthIntro)
-	// $('.question-text').html(res.data.title)
-	// var imgHtml = '';
-	// res.data.attachment.forEach(function(el) {
-	// 	imgHtml += `<img src=${el.url} class='img'>`
-	// })
-	// console.log(imgHtml)
-	// var imgsWidth = res.data.attachment.length * 1.8
-	// $('.imgs-box').css({
-	// 	width: imgsWidth + 'rem'
-	// })
-	// $('.question-box .imgs-box').html(imgHtml)
-	// $('.answer-count').html(res.data.answerCnt+'个回答')
 	$.ajax({
 		async: false,
 		type: 'get',
 		url: __api + 'v1/questionReply/getQuestionDetail',
 		header: {
-			// Authorization: token,
 			appname: "boblbee",
 			"Access-Control-Allow-Origin": "*"
 		},
 		data: {
 			questionId: question_id
 		},
-		success: function(res) {
+		success: function (res) {
 			console.log(res)
 			$('.head-portrait').attr('src', res.data.userAvatar)
 			$('.name').html(res.data.userName)
 			$('.oauth-desc').html(res.data.oauthIntro)
 			$('.question-text').html(res.data.title)
 			var imgHtml = '';
-			res.data.attachment.forEach(function(el) {
+			res.data.attachment.forEach(function (el) {
 				imgHtml += `<img src=${el.url} onclick="download()" class='img'>`
 			})
 			var imgsWidth = res.data.attachment.length * 1.8
@@ -85,7 +69,7 @@ $(function() {
 			$('.question-box .imgs-box').html(imgHtml)
 			$('.answer-count').html(res.data.answerNum + '个回答')
 		},
-		error: function(err) {
+		error: function (err) {
 			console.log(err)
 			$('#app').hide()
 		}
@@ -95,7 +79,6 @@ $(function() {
 		type: 'get',
 		url: __api + 'v1/questionReply/getOneQuestionReplyList',
 		header: {
-			// Authorization: token,
 			appname: "boblbee",
 			"Access-Control-Allow-Origin": "*"
 		},
@@ -105,10 +88,10 @@ $(function() {
 			offset: 0,
 			total: 20
 		},
-		success: function(res) {
+		success: function (res) {
 			console.log(res)
 			var commentHtml = '';
-			res.data.forEach(function(el) {
+			res.data.forEach(function (el) {
 				commentHtml +=
 					`<div class="comment-box" onclick="download()">
 				<div class="flex" style="margin-bottom: .2rem;">
@@ -127,7 +110,7 @@ $(function() {
 			})
 			$('.comments').html(commentHtml)
 		},
-		error: function(err) {
+		error: function (err) {
 			console.log(err)
 			$('#app').hide()
 		}
