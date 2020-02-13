@@ -184,7 +184,7 @@ $(function () {
 						var shareData = {
 							title: res.data.title,
 							desc: res.data.description,
-							link: res.data.h5_url,
+							link: window.location.href,
 							imgUrl: res.data.attachment[0].thumbnail
 						}
 						wxShare(shareData)
