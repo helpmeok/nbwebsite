@@ -1,12 +1,12 @@
-$(function() {
+$(function () {
 	if (parseInt(GetQueryString('apiType')) == 0) {
-		window.__api = 'https://dev.jeezero.com:18980/jeezero-boblbee-app/';//开发
+		window.__api = 'https://dev.jeezero.com:18980/jeezero-boblbee-app/'; //开发
 	} else if (parseInt(GetQueryString('apiType')) == 1) {
-		window.__api = 'https://beta.jeezero.com:18980/jeezero-boblbee-app/';//仿真
+		window.__api = 'https://beta.jeezero.com:18980/jeezero-boblbee-app/'; //仿真
 	} else {
-		window.__api = 'https://boblbee.superpapa.com.cn/jeezero-boblbee-app/';//正式
+		window.__api = 'https://boblbee.superpapa.com.cn/jeezero-boblbee-app/'; //正式
 	}
-	// window.__api = 'https://dev.jeezero.com:18980/jeezero-boblbee-app/';
+	// window.__api = 'https://boblbee.superpapa.com.cn/jeezero-boblbee-app/';
 
 	function GetQueryString(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -23,7 +23,7 @@ $(function() {
 			'display': 'flex'
 		})
 	}
-	$('.close').click(function() {
+	$('.close').click(function () {
 		$('.fixed-bottom').hide()
 	})
 	var article_id = GetQueryString('article_id');
@@ -44,11 +44,11 @@ $(function() {
 	}
 	size();
 	window.onresize = size;
-	setTimeout(function() {
+	setTimeout(function () {
 		document.querySelector("body").style.visibility = "visible"
 		document.querySelector("html").style.visibility = "visible"
 	}, 100);
-	$('.show-all').click(function() {
+	$('.show-all').click(function () {
 		$('.mask').hide()
 		$('.content').css({
 			height: 'auto'
@@ -67,12 +67,13 @@ $(function() {
 			article_id: article_id,
 			request_type: "app"
 		},
-		success: function(res) {
+		success: function (res) {
 			console.log(res)
 			if (res.code == -1) {
 				$('#app').hide()
 				return
 			}
+
 			res.data.content = res.data.content.replace(/<img/g, '<img style="max-width:100%;" onclick="lookImage(this)"')
 			res.data.content = res.data.content.replace(/href/g, 'data-href')
 			res.data.content = res.data.content.replace(/<section/g, '<section style="max-width:100%;"')
@@ -93,9 +94,9 @@ $(function() {
 				$('.classify').hide()
 			}
 			if (res.data.tagList.length) {
-				var tagHtml=''
-				res.data.tagList.forEach(function (el,i) {
-					tagHtml+=`<div class="item" onclick="goTag(${i})">${el.name}</div>`
+				var tagHtml = ''
+				res.data.tagList.forEach(function (el, i) {
+					tagHtml += `<div class="item" onclick="goTag(${i})">${el.name}</div>`
 				})
 				$('.tags').html(tagHtml)
 			} else {
@@ -118,16 +119,16 @@ $(function() {
 
 			if (GetQueryString('request_type')) {
 				if (res.data.questionList.length) {
-					var questionHtml=''
-					res.data.questionList.forEach(function(el){
-						questionHtml+=`<div class="item">${el.questionName}</div>`
+					var questionHtml = ''
+					res.data.questionList.forEach(function (el) {
+						questionHtml += `<div class="item">${el.questionName}</div>`
 					})
 					$('.question-box').html(questionHtml)
 				}
 				if (res.data.expendList.length) {
-					var expendHtml=''
-					res.data.expendList.forEach(function(el){
-						expendHtml+=`<div class="item">
+					var expendHtml = ''
+					res.data.expendList.forEach(function (el) {
+						expendHtml += `<div class="item">
 							<img src="${el.attachment[0].url}" style="width: 100%;height: 2.2rem;">
 							<div class="sigle-line-text" style="font-size: .3rem;WebkitBoxOrient: vertical;">${el.title}</div>
 							<div style="color: gray;font-size: .26rem; margin: .1rem 0;">
@@ -137,13 +138,13 @@ $(function() {
 						`
 					})
 					$('.expend-box').html(expendHtml)
-				}else{
+				} else {
 					$('.expend').hide()
 				}
 				if (res.data.recommendList.length) {
-					var recommendHtml=''
-					res.data.recommendList.forEach(function(el){
-						recommendHtml+=`<div class="item">
+					var recommendHtml = ''
+					res.data.recommendList.forEach(function (el) {
+						recommendHtml += `<div class="item">
 							<img src="${el.attachment[0].url}" style="width: 25%;height: 100%;">
 							<div style="width: 70%;height: 100%;" class="flex-c-center">
 								<div class="sigle-line-text" style="font-size: .3rem;-webkit-box-orient: vertical;">${el.title}</div>
@@ -155,14 +156,46 @@ $(function() {
 						`
 					})
 					$('.recommend-box').html(recommendHtml)
-				}else{
+				} else {
 					$('.recommend').hide()
 				}
-			}else{
+			} else {
 				$('.more-content').hide()
 			}
+			// 分享功能
+			$.ajax({
+				async: false,
+				type: 'get',
+				url: __api + 'v1/other/getWechatH5Config',
+				data: {
+					url: window.location.href.split('#')[0]
+				},
+				success: function (ds) {
+					var result = ds.data;
+					if (!!result) {
+						wx.config({
+							debug: false,
+							appId: result.appid,
+							timestamp: result.timestamp,
+							nonceStr: result.nonceStr,
+							signature: result.signature,
+							jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
+						});
+						var shareData = {
+							title: res.data.title,
+							desc: res.data.description,
+							link: res.data.h5_url,
+							imgUrl: res.data.attachment[0].thumbnail
+						}
+						wxShare(shareData)
+					}
+				},
+				error: function (e) {
+					console.log(e)
+				}
+			});
 		},
-		error: function(err) {
+		error: function (err) {
 			console.log(err)
 			$('#app').hide()
 		}
