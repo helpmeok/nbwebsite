@@ -27,6 +27,7 @@ $(function () {
 		$('.fixed-bottom').hide()
 	})
 	var article_id = GetQueryString('article_id');
+	var hideTags = GetQueryString('hideTags');
 	// var article_id = 44021;
 
 	function getimgsrc(htmlstr) {
@@ -93,7 +94,7 @@ $(function () {
 			} else {
 				$('.classify').hide()
 			}
-			if (res.data.tagList.length) {
+			if (res.data.tagList.length && !hideTags) {
 				var tagHtml = ''
 				res.data.tagList.forEach(function (el, i) {
 					tagHtml += `<div class="item" onclick="goTag(${i})">${el.name}</div>`
