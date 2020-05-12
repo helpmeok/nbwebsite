@@ -1,12 +1,9 @@
 $(function () {
 	if (parseInt(GetQueryString('apiType')) == 0) {
-		window.__api = 'https://dev.jeezero.com:8980/jeezero-boblbee-app/'; //开发
-	} else if (parseInt(GetQueryString('apiType')) == 1) {
-		window.__api = 'https://beta.jeezero.com:18980/jeezero-boblbee-app/'; //仿真
+		window.__api = 'https://dev.jeezero.com:8980/jeeplus-boblbee-app/'; //开发
 	} else {
-		window.__api = 'https://boblbee.superpapa.com.cn/jeezero-boblbee-app/'; //正式
+		window.__api = 'https://boblbee.superpapa.com.cn/jeeplus-boblbee-app/'; //正式
 	}
-	// window.__api = 'https://dev.jeezero.com:8980/jeezero-boblbee-app/';
 
 	function GetQueryString(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -14,21 +11,6 @@ $(function () {
 		if (r != null) return unescape(r[2]);
 		return null;
 	}
-
-	if (GetQueryString('request_type')) {
-		$('.fixed-bottom').css({
-			'display': 'flex'
-		})
-		$('.pad-bottom').css({
-			'display': 'flex'
-		})
-	}
-	$('.close').click(function () {
-		$('.fixed-bottom').hide()
-	})
-	var guide_id = GetQueryString('guide_id');
-	// var guide_id = "52336";
-
 
 	function size() {
 		var html = document.querySelector('html');
@@ -43,30 +25,53 @@ $(function () {
 	$.ajax({
 		async: false,
 		type: 'get',
-		url: __api + 'v1/bnsBaby/bnsBabyGuide/detail',
+		dataType: 'json',
+		url: __api + 'v1/site/list',
 		headers: {
-			appname: "boblbee",
-			"Access-Control-Allow-Origin": "*"
+			'appname': "boblbee",
+			"Access-Control-Allow-Origin": "*",
+			'devicePlatform': 3
 		},
-		data: {
-			id: guide_id
-		},
+		data: {},
 		success: function (res) {
 			console.log(res)
 			if (res.code == -1) {
 				$('#app').hide()
 				return
 			}
-			$('.header-img').css({
-				"background-image": `url(${res.data.urls.split(',')[0]})`
+			res.data = res.data
+			var html = "";
+			res.data.forEach(function (el) {
+				if (!!el.downloadPage) {
+					html += `
+					<div class="item flex-c-center">
+					<img src="${el.logo}" alt="" class="logo">
+					<div class="title">${el.siteName}</div>
+					<div class="down-btn" data-url="${el.downloadPage}" onclick="downAPP(this)">下载</div>
+				</div>
+					`
+				} else {
+					if (phoneType() == 'android') {
+						html += `
+					<div class="item flex-c-center">
+					<img src="${el.logo}" alt="" class="logo">
+					<div class="title">${el.siteName}</div>
+					${el.apkUrl?'<div class="down-btn" data-url="'+el.apkUrl+'" onclick="downAPP(this)">下载</div>':'<div class="desc"">- 即将上线 -</div>'}
+				</div>
+					`
+					} else {
+						html += `
+						<div class="item flex-c-center">
+						<img src="${el.logo}" alt="" class="logo">
+						<div class="title">${el.siteName}</div>
+						${el.iosUrl?'<div class="down-btn" data-url="'+el.iosUrl+'" onclick="downAPP(this)">下载</div>':'<div class="desc"">- 即将上线 -</div>'}
+					</div>
+						`
+					}
+				}
+
 			})
-			$('.title').html(res.data.title);
-			$('.group-desc').html('适龄：'+res.data.groupExplain);
-			res.data.guideContent = res.data.guideContent.replace(/<img/g, '<img style="max-width:100%;" onclick="lookImage(this)"')
-			res.data.guideContent = res.data.guideContent.replace(/href/g, 'data-href')
-			res.data.guideContent = res.data.guideContent.replace(/<section/g, '<section style="max-width:100%;"')
-			res.data.guideContent = res.data.guideContent.replace(/preview.html/g, 'player.html')
-			$('.guide-content').html(res.data.guideContent);
+			$('.list').html(html)
 			// 分享功能
 			$.ajax({
 				async: false,
@@ -87,10 +92,10 @@ $(function () {
 							jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
 						});
 						var shareData = {
-							title:res.data.title,
-							desc: res.data.description,
+							title: "宝宝贝实用工具集",
+							desc: "攻城狮奶爸们把智慧与育儿融为各类工具，等待你的品鉴！",
 							link: window.location.href,
-							imgUrl: res.data.urls.split(',')[0]
+							imgUrl: "https://s1.ax1x.com/2020/05/07/YehJQs.th.png"
 						}
 						wxShare(shareData)
 					}
@@ -106,5 +111,10 @@ $(function () {
 		}
 	})
 
+	function downAPP(url) {
+		if (!!url) {
+			window.location.href = url;
+		}
+	}
 
 })

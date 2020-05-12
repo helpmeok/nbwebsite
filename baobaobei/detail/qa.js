@@ -78,7 +78,7 @@ $(function () {
 		async: false,
 		type: 'get',
 		url: __api + 'v1/questionReply/getOneQuestionReplyList',
-		header: {
+		headers: {
 			appname: "boblbee",
 			"Access-Control-Allow-Origin": "*"
 		},

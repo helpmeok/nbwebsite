@@ -59,7 +59,7 @@ $(function () {
 		async: false,
 		type: 'get',
 		url: __api + 'v1/article/getArticleDetail',
-		header: {
+		headers: {
 			// Authorization: token,
 			appname: "boblbee",
 			"Access-Control-Allow-Origin": "*"
