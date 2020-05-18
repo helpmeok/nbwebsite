@@ -41,35 +41,29 @@ $(function () {
 			}
 			res.data = res.data
 			var html = "";
+			var downHtml = '';
 			res.data.forEach(function (el) {
 				if (!!el.downloadPage) {
-					html += `
-					<div class="item flex-c-center">
-					<img src="${el.logo}" alt="" class="logo">
-					<div class="title">${el.siteName}</div>
-					<div class="down-btn" data-url="${el.downloadPage}" onclick="downAPP(this)">下载</div>
-				</div>
-					`
+					downHtml = `<div class="down-btn" data-url="${el.downloadPage}" onclick="downAPP(this)">下载</div>`
 				} else {
 					if (phoneType() == 'android') {
-						html += `
-					<div class="item flex-c-center">
-					<img src="${el.logo}" alt="" class="logo">
-					<div class="title">${el.siteName}</div>
-					${el.apkUrl?'<div class="down-btn" data-url="'+el.apkUrl+'" onclick="downAPP(this)">下载</div>':'<div class="desc"">- 即将上线 -</div>'}
-				</div>
-					`
+						downHtml = `${el.apkUrl?'<div class="down-btn" data-url="'+el.apkUrl+'" onclick="downAPP(this)">下载</div>':'<div class="desc"">- 即将上线 -</div>'}`
 					} else {
-						html += `
-						<div class="item flex-c-center">
-						<img src="${el.logo}" alt="" class="logo">
-						<div class="title">${el.siteName}</div>
-						${el.iosUrl?'<div class="down-btn" data-url="'+el.iosUrl+'" onclick="downAPP(this)">下载</div>':'<div class="desc"">- 即将上线 -</div>'}
-					</div>
-						`
+						downHtml = `${el.iosUrl?'<div class="down-btn" data-url="'+el.iosUrl+'" onclick="downAPP(this)">下载</div>':'<div class="desc"">- 即将上线 -</div>'}`
 					}
 				}
-
+				html += `<div class="item">
+				<div class="item-l">
+					<img src="${el.logo}" alt="" class="logo">
+				</div>
+				<div class="item-c">
+					<div class="app-name">${el.siteName}</div>
+					<div class="app-desc"></div>
+				</div>
+				<div class="item-r">
+					${downHtml}
+				</div>
+			</div>`
 			})
 			$('.list').html(html)
 			// 分享功能

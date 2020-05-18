@@ -79,41 +79,54 @@
 		}
 
 		.header {
-			padding: .8rem .5rem .2rem .5rem;
-		}
-
-		.title-img {
-			width: 4rem;
-		}
-
-		.title-icon-img {
-			width: 2.3rem;
+			width: 100%;
 		}
 
 		.list {
 			padding: .2rem .5rem;
-			flex-wrap: wrap;
+		}
+
+		.list .item {
+			margin: .4rem 0;
 			display: flex;
-			justify-content: space-between;
-			align-items: start;
+			align-items: center;
 		}
 
-		.list .item{
-			margin: .2rem;
+		.item .item-l {
+			width: 30%;
+			display: flex;
+			align-items: center;
 		}
 
-		.item .logo {
+		.item .item-c {
+			width: 45%;
+		}
+
+		.item .item-r {
+			width: 25%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.item .item-l .logo {
 			width: 1.6rem;
 			border-radius: .2rem;
+			box-shadow: 0 .05rem .08rem 0 rgba(0, 0, 0, 0.35);
 		}
 
-		.item .title {
-			font-size: .26rem;
-			color: #ffffff;
-			margin: .2rem 0;
+		.item .item-c .app-name {
+			font-size: .3rem;
+			color: #333333;
+			font-weight: bold;
 		}
 
-		.item .down-btn {
+		.item .item-c .app-desc {
+			font-size: .24rem;
+			color: #666666;
+		}
+
+		.item .item-r .down-btn {
 			width: 1.2rem;
 			height: .6rem;
 			border-radius: .3rem;
@@ -124,35 +137,19 @@
 			font-size: .26rem;
 		}
 
-		.item .desc{
-			color: #ffffff;
-			font-size: .26rem;
-			height: .6rem;
-			line-height: .6rem;
-		}
-		
-		.gray-desc{
-			position: absolute;
-			width: 100%;
-			left: 0;
-			bottom: .3rem;
-			text-align: center;
-			font-size: .3rem;
-			color: #a3a3a3;
+		.item .item-r .desc {
+			color: #6D7870;
+			font-size: .24rem;
 		}
 	</style>
 </head>
 
 <body>
 	<div id="app">
-		<div class="flex-r-between header">
-			<img src="./images/download/title.png" alt="" class="title-img">
-			<img src="./images/download/title-icon.png" alt="" class="title-icon-img">
-		</div>
+		<img src="./images/download/download-header.png" alt="" class="header">
 		<div class="list">
-			
+
 		</div>
-		<div class="gray-desc">即将为您带来更多实用工具</div>
 	</div>
 	<script type="text/javascript">
 		function phoneType() {
@@ -165,10 +162,25 @@
 				return "pc";
 			}
 		}
+
 		function downAPP(el) {
-			console.log(el.getAttribute('data-url'))
-			if (!!el.getAttribute('data-url')) {
-				window.location.href = el.getAttribute('data-url');
+			if (isWeiXin() && (phoneType() == 'android')) {
+				window.confirm('请点击右上角按钮，使用系统浏览器打开并下载')
+			} else {
+				if (!!el.getAttribute('data-url')) {
+					window.location.href = el.getAttribute('data-url');
+				}
+			}
+		}
+
+		function isWeiXin() {
+			//window.navigator.userAgent属性包含了浏览器类型、版本、操作系统类型、浏览器引擎类型等信息，这个属性可以用来判断浏览器类型
+			var ua = window.navigator.userAgent.toLowerCase();
+			//通过正则表达式匹配ua中是否含有MicroMessenger字符串
+			if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+				return true;
+			} else {
+				return false;
 			}
 		}
 		(function () {
