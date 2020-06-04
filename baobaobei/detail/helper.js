@@ -38,7 +38,8 @@ $(function () {
         url: __api + 'v1/search/qaset',
         headers: {
             appname: "boblbee",
-            "Access-Control-Allow-Origin": "*"
+            "Access-Control-Allow-Origin": "*",
+            'devicePlatform': 3
         },
         data: {
             qaId: helperId,

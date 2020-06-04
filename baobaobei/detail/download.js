@@ -4,7 +4,6 @@ $(function () {
 	} else {
 		window.__api = 'https://boblbee.superpapa.com.cn/jeeplus-boblbee-app/'; //正式
 	}
-
 	function GetQueryString(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
 		var r = window.location.search.substr(1).match(reg);
@@ -43,14 +42,10 @@ $(function () {
 			var html = "";
 			var downHtml = '';
 			res.data.forEach(function (el) {
-				if (!!el.downloadPage) {
-					downHtml = `<div class="down-btn" data-url="${el.downloadPage}" onclick="downAPP(this)">下载</div>`
+				if (phoneType() == 'android') {
+					downHtml = `${el.apkUrl?'<div class="down-btn" data-url="'+el.apkUrl+'" onclick="downAPP(this)">下载</div>':'<div class="desc"">- 即将上线 -</div>'}`
 				} else {
-					if (phoneType() == 'android') {
-						downHtml = `${el.apkUrl?'<div class="down-btn" data-url="'+el.apkUrl+'" onclick="downAPP(this)">下载</div>':'<div class="desc"">- 即将上线 -</div>'}`
-					} else {
-						downHtml = `${el.iosUrl?'<div class="down-btn" data-url="'+el.iosUrl+'" onclick="downAPP(this)">下载</div>':'<div class="desc"">- 即将上线 -</div>'}`
-					}
+					downHtml = `${el.iosUrl?'<div class="down-btn" data-url="'+el.iosUrl+'" onclick="downAPP(this)">下载</div>':'<div class="desc"">- 即将上线 -</div>'}`
 				}
 				html += `<div class="item">
 				<div class="item-l">
@@ -58,7 +53,7 @@ $(function () {
 				</div>
 				<div class="item-c">
 					<div class="app-name">${el.siteName}</div>
-					<div class="app-desc"></div>
+					<div class="app-desc">${el.intro?el.intro:''}</div>
 				</div>
 				<div class="item-r">
 					${downHtml}
@@ -104,11 +99,4 @@ $(function () {
 			$('#app').hide()
 		}
 	})
-
-	function downAPP(url) {
-		if (!!url) {
-			window.location.href = url;
-		}
-	}
-
 })

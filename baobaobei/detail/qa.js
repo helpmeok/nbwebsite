@@ -45,9 +45,10 @@ $(function () {
 		async: false,
 		type: 'get',
 		url: __api + 'v1/questionReply/getQuestionDetail',
-		header: {
+		headers: {
 			appname: "boblbee",
-			"Access-Control-Allow-Origin": "*"
+			"Access-Control-Allow-Origin": "*",
+			'devicePlatform': 3
 		},
 		data: {
 			questionId: question_id

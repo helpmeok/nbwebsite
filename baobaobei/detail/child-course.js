@@ -1,12 +1,10 @@
 $(function () {
 	if (parseInt(GetQueryString('apiType')) == 0) {
-		window.__api = 'https://dev.jeezero.com:8980/jeezero-boblbee-app/'; //开发
-	} else if (parseInt(GetQueryString('apiType')) == 1) {
-		window.__api = 'https://beta.jeezero.com:18980/jeezero-boblbee-app/'; //仿真
-	} else {
-		window.__api = 'https://boblbee.superpapa.com.cn/jeezero-boblbee-app/'; //正式
+		window.__api = 'https://dev.jeezero.com:8980/jeeplus-boblbee-app/'; //开发
+	} else if (parseInt(GetQueryString('apiType')) == 2) {
+		window.__api = 'https://boblbee.superpapa.com.cn/jeeplus-boblbee-app/'; //正式
 	}
-	// window.__api = 'https://dev.jeezero.com:8980/jeezero-boblbee-app/';
+	window.__api = 'https://dev.jeezero.com:8980/jeeplus-boblbee-app/';
 
 	function GetQueryString(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -26,8 +24,8 @@ $(function () {
 	$('.close').click(function () {
 		$('.fixed-bottom').hide()
 	})
-	var guide_id = GetQueryString('guide_id');
-	// var guide_id = "52336";
+	var course_id = GetQueryString('course_id');
+	var course_id = "c205a8a859d54833b5404d291c2e2362";
 
 
 	function size() {
@@ -43,14 +41,14 @@ $(function () {
 	$.ajax({
 		async: false,
 		type: 'get',
-		url: __api + 'v1/bnsBaby/bnsBabyGuide/detail',
+		url: __api + 'v1/lesson/get',
 		headers: {
 			appname: "boblbee",
 			"Access-Control-Allow-Origin": "*",
 			'devicePlatform': 3
 		},
 		data: {
-			id: guide_id
+			id: course_id
 		},
 		success: function (res) {
 			console.log(res)
@@ -58,16 +56,10 @@ $(function () {
 				$('#app').hide()
 				return
 			}
-			$('.header-img').css({
-				"background-image": `url(${res.data.urls?res.data.urls.split(',')[0]:"https://boblbee.superpapa.com.cn/boblbee/static/child/yuer_detail_top_placeholderimage@3x.png"})`
-			})
-			$('.title').html(res.data.title);
-			$('.group-desc').html('适龄：'+res.data.groupExplain);
-			res.data.guideContent = res.data.guideContent.replace(/<img/g, '<img style="max-width:100%;" onclick="lookImage(this)"')
-			res.data.guideContent = res.data.guideContent.replace(/href/g, 'data-href')
-			res.data.guideContent = res.data.guideContent.replace(/<section/g, '<section style="max-width:100%;"')
-			res.data.guideContent = res.data.guideContent.replace(/preview.html/g, 'player.html')
-			$('.guide-content').html(res.data.guideContent);
+			$('.sound-name').text(res.data.lessonTitle)
+			$('.sound-audio').html(`<audio src="${res.data.mediaInfo.url}" controls>
+				  您的浏览器不支持音频播放。
+					</audio>`)
 			// 分享功能
 			$.ajax({
 				async: false,
@@ -88,10 +80,10 @@ $(function () {
 							jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
 						});
 						var shareData = {
-							title:res.data.title,
-							desc: res.data.description,
+							title: res.data.lessonTitle,
+							desc: "快来听听专家或大V们有何高见吧……",
 							link: window.location.href,
-							imgUrl: res.data.urls.split(',')[0]
+							imgUrl: "https://s1.ax1x.com/2020/04/29/JHP77R.th.png"
 						}
 						wxShare(shareData)
 					}

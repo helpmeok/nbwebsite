@@ -44,7 +44,8 @@ $(function () {
 		url: __api + 'v1/sound/get',
 		headers: {
 			appname: "boblbee",
-			"Access-Control-Allow-Origin": "*"
+			"Access-Control-Allow-Origin": "*",
+			'devicePlatform': 3
 		},
 		data: {
 			id: voice_id

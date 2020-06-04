@@ -62,7 +62,8 @@ $(function () {
 		headers: {
 			// Authorization: token,
 			appname: "boblbee",
-			"Access-Control-Allow-Origin": "*"
+			"Access-Control-Allow-Origin": "*",
+			'devicePlatform': 3
 		},
 		data: {
 			article_id: article_id,
