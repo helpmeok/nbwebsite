@@ -1,10 +1,10 @@
 $(function () {
 	if (parseInt(GetQueryString('apiType')) == 0) {
-		window.__api = 'https://dev.jeezero.com:8980/jeeplus-boblbee-app/'; //开发
+		window.__api = 'https://dev.baobaobei.com.cn:8980/jeeplus-boblbee-app/'; //开发
 	} else if (parseInt(GetQueryString('apiType')) == 2) {
 		window.__api = 'https://boblbee.superpapa.com.cn/jeeplus-boblbee-app/'; //正式
 	}
-	window.__api = 'https://dev.jeezero.com:8980/jeeplus-boblbee-app/';
+	// window.__api = 'https://dev.baobaobei.com.cn:8980/jeeplus-boblbee-app/';
 
 	function GetQueryString(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -25,7 +25,7 @@ $(function () {
 		$('.fixed-bottom').hide()
 	})
 	var course_id = GetQueryString('course_id');
-	var course_id = "c205a8a859d54833b5404d291c2e2362";
+	// var course_id = "c205a8a859d54833b5404d291c2e2362";
 
 
 	function size() {

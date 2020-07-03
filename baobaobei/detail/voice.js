@@ -1,10 +1,10 @@
 $(function () {
 	if (parseInt(GetQueryString('apiType')) == 0) {
-		window.__api = 'https://dev.jeezero.com:8980/jeeplus-boblbee-app/'; //开发
+		window.__api = 'https://dev.baobaobei.com.cn:8980/jeeplus-boblbee-app/'; //开发
 	} else if (parseInt(GetQueryString('apiType')) == 2) {
 		window.__api = 'https://boblbee.superpapa.com.cn/jeeplus-boblbee-app/'; //正式
 	}
-	// window.__api = 'https://dev.jeezero.com:8980/jeeplus-boblbee-app/';
+	// window.__api = 'https://dev.baobaobei.com.cn:8980/jeeplus-boblbee-app/';
 
 	function GetQueryString(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");

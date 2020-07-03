@@ -1,8 +1,8 @@
 $(function () {
 	if (parseInt(GetQueryString('apiType')) == 0) {
-		window.__api = 'https://dev.jeezero.com:8980/jeezero-boblbee-app/'; //开发
+		window.__api = 'https://dev.baobaobei.com.cn:8980/jeezero-boblbee-app/'; //开发
 	} else if (parseInt(GetQueryString('apiType')) == 1) {
-		window.__api = 'https://beta.jeezero.com:18980/jeezero-boblbee-app/'; //仿真
+		window.__api = 'https://beta.baobaobei.com.cn:18980/jeezero-boblbee-app/'; //仿真
 	} else {
 		window.__api = 'https://boblbee.superpapa.com.cn/jeezero-boblbee-app/'; //正式
 	}
