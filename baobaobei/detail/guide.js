@@ -6,7 +6,7 @@ $(function () {
 	} else {
 		window.__api = 'https://boblbee.superpapa.com.cn/jeezero-boblbee-app/'; //正式
 	}
-	// window.__api = 'https://dev.baobaobei.com.cn:8980/jeezero-boblbee-app/';
+	// window.__api = 'https://boblbee.superpapa.com.cn/jeezero-boblbee-app/';
 
 	function GetQueryString(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -17,18 +17,14 @@ $(function () {
 
 	if (GetQueryString('request_type')) {
 		$('.fixed-bottom').css({
-			'display': 'flex'
-		})
-		$('.pad-bottom').css({
-			'display': 'flex'
+			'display': 'none'
 		})
 	}
 	$('.close').click(function () {
 		$('.fixed-bottom').hide()
 	})
 	var guide_id = GetQueryString('guide_id');
-	// var guide_id = "52336";
-
+	// var guide_id = "300634";
 
 	function size() {
 		var html = document.querySelector('html');
@@ -58,11 +54,25 @@ $(function () {
 				$('#app').hide()
 				return
 			}
-			$('.header-img').css({
-				"background-image": `url(${res.data.urls?res.data.urls.split(',')[0]:"https://boblbee.superpapa.com.cn/boblbee/static/child/yuer_detail_top_placeholderimage@3x.png"})`
+			var imgArr= res.data.urls?res.data.urls.split(','):['https://boblbee.superpapa.com.cn/boblbee/static/child/yuer_detail_top_placeholderimage@3x.png']
+			var imgArrHtml=""
+			imgArr.forEach(function(el){
+				imgArrHtml+=`<div class="swiper-slide"><img class="header-img" src="${el}" ></div>`
+			})
+			$('.swiper-wrapper').html(imgArrHtml)
+			if (!res.data.urls) {
+				$('.swiper-pagination').hide()
+			}
+			new Swiper('.swiper-container', {
+				autoplay: true,//可选选项，自动滑动
+				// 如果需要分页器
+				pagination: {
+					el: '.swiper-pagination',
+					bulletActiveClass: 'my-bullet-active',
+				}
 			})
 			$('.title').html(res.data.title);
-			$('.group-desc').html('适龄：'+res.data.groupExplain);
+			$('.group-desc').html('适龄：' + res.data.groupExplain);
 			res.data.guideContent = res.data.guideContent.replace(/<img/g, '<img style="max-width:100%;" onclick="lookImage(this)"')
 			res.data.guideContent = res.data.guideContent.replace(/href/g, 'data-href')
 			res.data.guideContent = res.data.guideContent.replace(/<section/g, '<section style="max-width:100%;"')
@@ -88,7 +98,7 @@ $(function () {
 							jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
 						});
 						var shareData = {
-							title:res.data.title,
+							title: res.data.title,
 							desc: res.data.description,
 							link: window.location.href,
 							imgUrl: res.data.urls.split(',')[0]

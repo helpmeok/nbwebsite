@@ -27,7 +27,9 @@
 	<meta name="msapplication-tap-highlight" content="no">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<title>宝宝贝</title>
+	<link rel="stylesheet" href="./css/swiper.min.css">
 	<script src="./jquery.min.js"></script>
+	<script src="./js/swiper.min.js"></script>
 	<script src="./js/wxjssdk.js"></script>
 	<script src="./js/wechat.js?v=5"></script>
 	<style>
@@ -112,30 +114,45 @@
 		.pd-box {
 			padding: .2rem .3rem;
 		}
-		.main{
+
+		.main {
 			width: 100%;
 		}
-		.main div{
+
+		.main div {
 			width: 100%;
 		}
-		.header-img{
+
+		.header-img {
 			width: 100%;
-			height: 4rem;
-			background-size: cover;
-			background-repeat: no-repeat;
-			background-position:center;
+			height: 100%;
 		}
-		.main .title{
+
+		.main .title {
 			font-size: .44rem;
 			font-weight: bold;
 		}
-		.main .group-desc{
+
+		.main .group-desc {
 			font-size: .3rem;
 			color: #A3A3A3;
 		}
-		.main .guide-content{
+
+		.main .guide-content {
 			font-size: .34rem !important;
 			padding-bottom: 1.5rem;
+		}
+
+		.swiper-container,.swiper-wrapper,.swiper-slide {
+			width: 100%;
+			height: 4rem;
+		}
+		.my-bullet-active{
+			background-color: #FC4041;
+			opacity: 1;
+		}
+		video{
+			object-fit:fill;
 		}
 	</style>
 </head>
@@ -143,7 +160,12 @@
 <body>
 	<div id="app">
 		<div class="main flex-c-center">
-			<div class="header-img"></div>
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+				</div>
+				<!-- 如果需要分页器 -->
+				<div class="swiper-pagination"></div>
+			</div>
 			<div class="pd-box flex-r-between">
 				<span class="title"></span>
 				<span class="group-desc"></span>
